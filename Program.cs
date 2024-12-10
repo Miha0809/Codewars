@@ -1,28 +1,23 @@
-﻿using System.Text;
-
-partial class Program
+﻿partial class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(Maskify("4556364607935616"));
+        Console.WriteLine(GetVowelCount("abracadabra"));
     }
 
-    public static string Maskify(string cc)
+    public static int GetVowelCount(string str)
     {
-        var result = new StringBuilder();
+        var count = 0;
+        var vowels = new[] {'a', 'e', 'i', 'o', 'u'};
 
-        for (int i = 0; i < cc.Length; i++)
+        foreach (var item in str)
         {
-            if (cc.Length - 4 > i)
+            if (vowels.Contains(item))
             {
-                result.Append("#");
-            }
-            else
-            {
-                result.Append(cc[i]);
+                count++;
             }
         }
 
-        return result.ToString();
+        return count;
     }
 }
