@@ -1,77 +1,28 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
 
 partial class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(Decode("...---..."));
+        Console.WriteLine(Maskify("4556364607935616"));
     }
 
-    private static Dictionary<string, char> dict = new Dictionary<string, char>()
+    public static string Maskify(string cc)
     {
-        { ".-", 'A' },
-        { "-...", 'B' },
-        { "-.-.", 'C' },
-        { "-..", 'D' },
-        { ".", 'E' },
-        { "..-.", 'F' },
-        { "--.", 'G' },
-        { "....", 'H' },
-        { "..", 'I' },
-        { ".---", 'J' },
-        { "-.-", 'K' },
-        { ".-..", 'L' },
-        { "--", 'M' },
-        { "-.", 'N' },
-        { "---", 'O' },
-        { ".--.", 'P' },
-        { "--.-", 'Q' },
-        { ".-.", 'R' },
-        { "...", 'S' },
-        { "-", 'T' },
-        { "..-", 'U' },
-        { "...-", 'V' },
-        { ".--", 'W' },
-        { "-..-", 'X' },
-        { "-.--", 'Y' },
-        { "--..", 'Z' },
-        { ".----", '1'},
-        { "..---", '2'},
-        { "...--", '3'},
-        { "....-", '4'},
-        { ".....", '5'},
-        { "-....", '6'},
-        { "--...", '7'},
-        { "---..", '8'},
-        { "----.", '9'},
-        { "-----", '0'},
-    };
+        var result = new StringBuilder();
 
-    public static string Decode(string morseCode)
-    {
-        if (morseCode.Equals("...---..."))
+        for (int i = 0; i < cc.Length; i++)
         {
-            return "SOS";
-        }
-
-        string[] arr = Regex.Replace(morseCode, @"\\s+", "  ").Split("  ");
-        string result = "";
-
-        for (int i = 0; i < arr.Length; i++)
-        {
-            var str = arr[i].Split(" ");
-
-            foreach (var c in str)
+            if (cc.Length - 4 > i)
             {
-                if (c != "")
-                {
-                    result += dict[c];
-                }
+                result.Append("#");
             }
-
-            result += " ";
+            else
+            {
+                result.Append(cc[i]);
+            }
         }
 
-        return result.Trim();
+        return result.ToString();
     }
 }
