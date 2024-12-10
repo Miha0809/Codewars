@@ -2,21 +2,24 @@
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(Solution(35));
-    }
-
-    public static int Solution(int value)
-    {
-        int suma = 0;
-
-        for (int i = 1; i < value; i++)
+        foreach(var item in GetIntegersFromList(new List<object>(){1, 2, "a", "b", "aasf", "1", "123", 123}))
         {
-            if (i % 3 == 0 || i % 5 == 0)
-            {
-                suma += i;
-            }
+            Console.WriteLine(item);
         }
-
-        return suma;
     }
+
+    public static IEnumerable<int> GetIntegersFromList(List<object> listOfItems)
+   {
+      List<int> result = new List<int>();
+     
+      foreach (var item in listOfItems)
+      {
+          if (item.GetType() == typeof(int))
+          {
+              result.Add(Convert.ToInt32(item));
+          }
+      }
+     
+     return result;
+   }
 }
