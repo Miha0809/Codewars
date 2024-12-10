@@ -2,22 +2,21 @@
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(GetVowelCount("abracadabra"));
+        Console.WriteLine(Solution(35));
     }
 
-    public static int GetVowelCount(string str)
+    public static int Solution(int value)
     {
-        var count = 0;
-        var vowels = new[] {'a', 'e', 'i', 'o', 'u'};
+        int suma = 0;
 
-        foreach (var item in str)
+        for (int i = 1; i < value; i++)
         {
-            if (vowels.Contains(item))
+            if (i % 3 == 0 || i % 5 == 0)
             {
-                count++;
+                suma += i;
             }
         }
 
-        return count;
+        return suma;
     }
 }
