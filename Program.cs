@@ -2,29 +2,8 @@
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(GetUnique([1, 1, 1, 2, 1, 1]));
+        Console.WriteLine(CreatePhoneNumber([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
     }
 
-    public static int GetUnique(IEnumerable<int> numbers)
-    {
-        Dictionary<int, int> dictionary = new Dictionary<int, int>();
-
-        foreach (var item in numbers)
-        {
-            int count = 0;
-
-            if (!dictionary.TryGetValue(item, out count))
-            {
-                dictionary.Add(item, count + 1);
-            }
-            else
-            {
-                count = dictionary[item];
-                dictionary[item] = count + 1;
-            }
-        }
-
-        return dictionary.MinBy(a => a.Value).Key;
-
-    }
+    public static string CreatePhoneNumber(int[] n) => $"({n[0]}{n[1]}{n[2]}) {n[3]}{n[4]}{n[5]}-{n[6]}{n[7]}{n[8]}{n[9]}";
 }
