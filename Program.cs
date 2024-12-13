@@ -2,24 +2,29 @@
 {
     public static void Main(string[] args)
     {
-        foreach (var item in FriendOrFoe(["Mark", "Jimmy", "Abel", "Amanda"]))
-        {
-            Console.WriteLine(item);
-        }
+        Console.WriteLine(GetUnique([1, 1, 1, 2, 1, 1]));
     }
 
-    public static IEnumerable<string> FriendOrFoe(string[] names)
+    public static int GetUnique(IEnumerable<int> numbers)
     {
-        List<string> friends = new List<string>();
+        Dictionary<int, int> dictionary = new Dictionary<int, int>();
 
-        foreach (var name in names)
+        foreach (var item in numbers)
         {
-            if (name.Length == 4)
+            int count = 0;
+
+            if (!dictionary.TryGetValue(item, out count))
             {
-                friends.Add(name);
+                dictionary.Add(item, count + 1);
+            }
+            else
+            {
+                count = dictionary[item];
+                dictionary[item] = count + 1;
             }
         }
 
-        return friends;
+        return dictionary.MinBy(a => a.Value).Key;
+
     }
 }
