@@ -2,8 +2,23 @@
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(CreatePhoneNumber([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
+        foreach (var item in UniqueInOrder("AAAABBBCCDAABBB"))
+        {
+            Console.Write(item + " ");
+        }
     }
 
-    public static string CreatePhoneNumber(int[] n) => $"({n[0]}{n[1]}{n[2]}) {n[3]}{n[4]}{n[5]}-{n[6]}{n[7]}{n[8]}{n[9]}";
+    public static IEnumerable<T> UniqueInOrder<T>(IEnumerable<T> iterable)
+    {
+        T lastSymbol = default;
+
+        foreach (var item in iterable)
+        {
+            if (!EqualityComparer<T>.Default.Equals(lastSymbol, item))
+            {
+                yield return item;
+                lastSymbol = item;
+            }
+        }
+    }
 }
