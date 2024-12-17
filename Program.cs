@@ -1,24 +1,33 @@
-﻿partial class Program
+﻿enum Roles
+{
+    Admin,
+    Client
+}
+
+partial class Program
 {
     public static void Main(string[] args)
     {
-        foreach (var item in UniqueInOrder("AAAABBBCCDAABBB"))
-        {
-            Console.Write(item + " ");
-        }
+        Console.WriteLine(Persistence(999));
     }
 
-    public static IEnumerable<T> UniqueInOrder<T>(IEnumerable<T> iterable)
+    public static int Persistence(long n, int count = 0)
     {
-        T lastSymbol = default;
-
-        foreach (var item in iterable)
+        if (n > 9)
         {
-            if (!EqualityComparer<T>.Default.Equals(lastSymbol, item))
+            count++;
+            long multiplicative = 1;
+
+            while (n > 0)
             {
-                yield return item;
-                lastSymbol = item;
+                var lastNumber = n % 10;
+                multiplicative *= lastNumber;
+                n /= 10;
             }
+
+            return Persistence(multiplicative, count);
         }
+
+        return count;
     }
 }
