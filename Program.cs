@@ -1,33 +1,28 @@
-﻿enum Roles
-{
-    Admin,
-    Client
-}
-
-partial class Program
+﻿partial class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(Persistence(999));
+        Console.WriteLine(string.Join(' ', ArrayDiff([1, 2, 2, 2, 3], [2])));
     }
 
-    public static int Persistence(long n, int count = 0)
+    public static int[] ArrayDiff(int[] a, int[] b)
     {
-        if (n > 9)
+        if (a.Length == 0)
         {
-            count++;
-            long multiplicative = 1;
-
-            while (n > 0)
-            {
-                var lastNumber = n % 10;
-                multiplicative *= lastNumber;
-                n /= 10;
-            }
-
-            return Persistence(multiplicative, count);
+            return [];
         }
 
-        return count;
+        List<int> result = new List<int>();
+        HashSet<int> removeNumber = new HashSet<int>(b);
+
+        foreach (var item in a)
+        {
+            if (!removeNumber.Contains(item))
+            {
+                result.Add(item);
+            }
+        }
+
+        return result.ToArray();
     }
 }
