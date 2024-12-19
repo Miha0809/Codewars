@@ -2,27 +2,26 @@
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(string.Join(' ', ArrayDiff([1, 2, 2, 2, 3], [2])));
+        Console.WriteLine(SpinWords("Hey fellow warriors"));
     }
 
-    public static int[] ArrayDiff(int[] a, int[] b)
+    public static string SpinWords(string sentence)
     {
-        if (a.Length == 0)
-        {
-            return [];
-        }
+        string[] words = sentence.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+        string result = string.Empty;
 
-        List<int> result = new List<int>();
-        HashSet<int> removeNumber = new HashSet<int>(b);
-
-        foreach (var item in a)
+        for (int i = 0; i < words.Length; i++)
         {
-            if (!removeNumber.Contains(item))
+            if (words[i].Length >= 5)
             {
-                result.Add(item);
+                char[] itemChar = words[i].ToCharArray();
+                Array.Reverse(itemChar);
+                words[i] = new string(itemChar);
             }
+
+            result += words[i] + " ";
         }
 
-        return result.ToArray();
+        return result[..^1];
     }
 }
