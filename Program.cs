@@ -2,26 +2,23 @@
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(SpinWords("Hey fellow warriors"));
+        Console.WriteLine(DigitalRoot(16));
     }
 
-    public static string SpinWords(string sentence)
+    public static int DigitalRoot(long n, long suma = 0)
     {
-        string[] words = sentence.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-        string result = string.Empty;
-
-        for (int i = 0; i < words.Length; i++)
+        if (n > 9)
         {
-            if (words[i].Length >= 5)
+            while (n > 0)
             {
-                char[] itemChar = words[i].ToCharArray();
-                Array.Reverse(itemChar);
-                words[i] = new string(itemChar);
+                var lastNumber = n % 10;
+                suma += lastNumber;
+                n /= 10;
             }
 
-            result += words[i] + " ";
+            return DigitalRoot(suma);
         }
 
-        return result[..^1];
+        return (int)n;
     }
 }
