@@ -1,16 +1,27 @@
-﻿using System.Text.RegularExpressions;
-
-partial class Program
+﻿partial class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(CountBits(1234));
+        Console.WriteLine(Find([2, 4, 0, 100, 4, 11, 2602, 36]));
     }
 
-    public static int CountBits(int n)
+    public static int Find(int[] integers)
     {
-        string binary = Convert.ToString(n, 2);
-        var countPositives = Regex.Matches(binary, "1").Count;
-        return countPositives;
+        List<int> oddNumbers = new List<int>();
+        List<int> evenNumbers = new List<int>();
+
+        foreach (var number in integers)
+        {
+            if (number % 2 == 0)
+            {
+                evenNumbers.Add(number);
+            }
+            else
+            {
+                oddNumbers.Add(number);
+            }
+        }
+
+        return (oddNumbers.Count == 1 ? oddNumbers[0] : evenNumbers[0]);
     }
 }
