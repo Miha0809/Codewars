@@ -2,26 +2,22 @@
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(Find([2, 4, 0, 100, 4, 11, 2602, 36]));
+        Console.WriteLine(ToCamelCase("the-stealth-warrior"));
     }
 
-    public static int Find(int[] integers)
+    public static string ToCamelCase(string str)
     {
-        List<int> oddNumbers = new List<int>();
-        List<int> evenNumbers = new List<int>();
+        string[] camelCase = str.Split(
+            new char[] { '-', '_' },
+            StringSplitOptions.RemoveEmptyEntries
+        );
 
-        foreach (var number in integers)
+        for (int i = 1; i < camelCase.Length; i++)
         {
-            if (number % 2 == 0)
-            {
-                evenNumbers.Add(number);
-            }
-            else
-            {
-                oddNumbers.Add(number);
-            }
+            camelCase[i] = char.ToUpper(camelCase[i][0]) + camelCase[i].Substring(1);
         }
 
-        return (oddNumbers.Count == 1 ? oddNumbers[0] : evenNumbers[0]);
+        return string.Concat(camelCase);
+
     }
 }
